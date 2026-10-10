@@ -1,4 +1,4 @@
-/* Layout & Container Spacing */
+/* Keep the main content centered and give each section room to breathe. */
 main {
     max-width: 1200px;
     margin: 40px auto;
@@ -16,11 +16,11 @@ section h2 {
     text-shadow: 2px 2px 5px #000;
 }
 
-/* Featured Spotlight Banner */
+/* The featured game's art sits behind its text and controls. */
 .featured-card {
     background: linear-gradient(135deg, rgba(15, 8, 5, 0.95), rgba(35, 18, 10, 0.8)), 
                 url('https://via.placeholder.com/1200x400') center/cover no-repeat;
-    border: 2px solid #8b5a2b; /* Aged bronze */
+    border: 2px solid #8b5a2b;
     border-radius: 8px;
     padding: 50px 40px;
     box-shadow: inset 0 0 40px rgba(0,0,0,0.8), 0 10px 30px rgba(0, 0, 0, 0.9);
@@ -256,7 +256,7 @@ section h2 {
 }
 
 .badge {
-    background: #7b1818; /* Wax seal red */
+    background: #7b1818;
     color: #f4ecd8;
     font-size: 0.8rem;
     font-weight: bold;
@@ -304,14 +304,14 @@ section h2 {
     box-shadow: 0 6px 15px rgba(0,0,0,0.8), 0 0 10px rgba(139, 90, 43, 0.5);
 }
 
-/* RPG Game Grid */
+/* Cards fill each row while keeping a comfortable minimum width. */
 .game-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 30px;
 }
 
-/* Leather-bound Game Cards */
+/* Give each game card a consistent layout and a subtle hover lift. */
 .game-card {
     background: linear-gradient(to bottom, #1c110a, #110905);
     border: 1px solid #3a2315;

@@ -1,8 +1,7 @@
 <?php
-// filepath: WEB/php/Login-Page.php
 session_start();
 
-// Import shared database connection
+// Use the same database connection as the rest of the site.
 require_once __DIR__ . '/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {
@@ -33,7 +32,7 @@ $user = $result->fetch_assoc();
 
 $passwordIsValid = $user && password_verify($password, $user["password"]);
 
-// Legacy password update fallback
+// Upgrade older plain-text passwords to a hash the next time their owner signs in.
 if ($user && !$passwordIsValid && $password === (string)$user["password"]) {
     $newHash = password_hash($password, PASSWORD_DEFAULT);
     $updateStmt = $conn->prepare("UPDATE `user` SET password = ? WHERE id = ?");
@@ -45,11 +44,11 @@ if ($user && !$passwordIsValid && $password === (string)$user["password"]) {
 if ($passwordIsValid) {
     session_regenerate_id(true);
 
-    // Store user info in session
+    // Keep the signed-in user's identity available to the rest of the site.
     $_SESSION["user_id"] = $user["id"];
     $_SESSION["username"] = $user["username"];
     
-    // Redirect to main homepage
+    // Send the newly signed-in user back to the welcome page.
     header("Location: ../Html%20pages/Landing-page.html");
     exit;
 }

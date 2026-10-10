@@ -26,10 +26,10 @@
     </nav>
 
     <main class="page-wrapper" style="margin: 30px auto;">
-        <!-- Loading Indicator -->
+        <!-- Show a message until the game's details have loaded. -->
         <div id="game-loading" style="text-align: center; font-size: 1.2rem;">Loading quest details from archives...</div>
 
-        <!-- Dynamic Game Content -->
+        <!-- The script fills this section with information for the selected game. -->
         <div id="game-details-content" style="display: none;">
             <h1 id="game-title"></h1>
             
@@ -46,14 +46,14 @@
                     <p><strong>Release Date:</strong> <span id="game-released"></span></p>
                     <p><strong>Genres:</strong> <span id="game-genres"></span></p>
                     
-                    <!-- Direct Steam Store Link -->
+                    <!-- Add a Steam store link when one is available. -->
                     <div id="steam-link-container" style="margin-top: 20px;"></div>
                 </div>
             </div>
 
             <hr class="hr-tavern">
 
-            <!-- Game Description -->
+            <!-- Read the game's overview and description here. -->
             <section style="margin-bottom: 30px;">
                 <h2>Overview</h2>
                 <div id="game-description"></div>
@@ -61,7 +61,7 @@
 
             <hr class="hr-tavern">
 
-            <!-- Video Trailer Section -->
+            <!-- Play available trailers without leaving the page. -->
             <section style="margin-bottom: 30px;">
                 <h2>Trailers & Gameplay Clips</h2>
                 <div id="trailer-container">
@@ -71,7 +71,7 @@
 
             <hr class="hr-tavern">
 
-            <!-- Rating & Comments Section -->
+            <!-- Signed-in players can leave an XP score and a public review. -->
             <section style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 10px; border: 1px solid #54311c;">
                 <h2>Submit Your Review</h2>
                 <form id="review-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto;">

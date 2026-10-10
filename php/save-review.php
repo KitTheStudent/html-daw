@@ -1,11 +1,10 @@
 <?php
-// filepath: WEB/php/save-review.php
 session_start();
 require_once __DIR__ . '/db.php';
 
 header('Content-Type: application/json');
 
-// Ensure user is logged in
+// Only signed-in adventurers can publish a review.
 if (!isset($_SESSION["user_id"])) {
     http_response_code(401);
     echo json_encode(["success" => false, "message" => "Please log in to submit a review."]);

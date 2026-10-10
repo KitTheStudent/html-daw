@@ -25,7 +25,7 @@
     </nav>
 
     <main>
-        <!-- 1. Featured Spotlight Section -->
+        <!-- The featured quest changes automatically and can also be browsed manually. -->
         <section class="featured-section">
             <h2>⚔️ Featured Quest of the Week</h2>
             <div id="featured-game" class="featured-card">
@@ -45,7 +45,7 @@
             </div>
         </section>
 
-        <!-- 2. Trending RPGs Section -->
+        <!-- Browse a smaller, paged selection of currently trending RPGs. -->
         <section class="trending-section">
             <h2>🔥 Trending RPGs</h2>
             <p id="catalog-filter-status" role="status" aria-live="polite"></p>
@@ -59,7 +59,7 @@
             </nav>
         </section>
 
-        <!-- 3. Full RPG Archive Section -->
+        <!-- Browse the larger catalog, with more results loaded as needed. -->
         <section class="explore-section">
             <h2>📜 The RPG Scroll</h2>
             <div id="rpg-grid" class="game-grid">
@@ -78,7 +78,7 @@
         <p>&copy; 2026 Traveler's Journey. Rest by the fire.</p>
     </footer>
 
-    <!-- Connect your JavaScript data -->
+    <!-- Load the built-in catalog first, then fetch and render live game data. -->
     <script src="../js/games.js"></script>
     <script src="../js/api.js"></script>
 </body>

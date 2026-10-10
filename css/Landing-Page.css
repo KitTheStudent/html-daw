@@ -1,6 +1,4 @@
-/* ==========================================================================
-   Traveler's Journey - Global Tavern Theme
-   ========================================================================== */
+/* Shared colors, typography, and navigation styles for every page. */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
 
@@ -11,9 +9,9 @@
 }
 
 body {
-    /* Richer radial gradient simulating a glowing hearth in a dark room */
+    /* A warm glow at the top fades into the darker tavern background. */
     background: radial-gradient(circle at 50% -20%, #3e1f0f 0%, #140b07 40%, #050302 100%);
-    color: #d8c3a5; /* Softer, aged bone text */
+    color: #d8c3a5;
     font-family: 'Lora', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     min-height: 100vh;
     line-height: 1.6;
@@ -28,7 +26,7 @@ header {
 }
 
 header h1 {
-    color: #f4d03f; /* Richer gold */
+    color: #f4d03f;
     font-size: 3rem;
     font-weight: 700;
     letter-spacing: 3px;
@@ -67,7 +65,7 @@ nav ul li a {
     border-bottom: 2px solid transparent;
 }
 
-/* Glowing Embers Hover */
+/* Highlight the current page and warm up links on hover. */
 nav ul li a:hover,
 nav ul li a.active {
     color: #f4d03f;

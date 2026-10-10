@@ -1,13 +1,9 @@
-/* ==========================================================================
-   Tavern General Pages (About, Categories, Media Boxes)
-   ========================================================================== */
-
-/* Main Text Container (Used for About page, Lore, etc.) */
+/* Shared layout for the About page, categories, and other text panels. */
 .page-container {
     max-width: 850px;
     margin: 60px auto;
     padding: 40px 50px;
-    background: rgba(17, 9, 5, 0.9); /* Deep, smoky wood tone */
+    background: rgba(17, 9, 5, 0.9);
     border: 2px solid #4a2e1b;
     border-radius: 8px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 0, 0, 0.7);
@@ -29,7 +25,7 @@
     font-size: 1.15rem;
     line-height: 1.9;
     margin-bottom: 22px;
-    color: #d8c3a5; /* Aged bone text */
+    color: #d8c3a5;
     text-shadow: 1px 1px 3px #000;
 }
 
@@ -75,11 +71,7 @@
     line-height: 1.6;
 }
 
-/* ==========================================================================
-   Game Details Specific Styling
-   ========================================================================== */
-
-/* The detailed quest info box on game.html */
+/* Keep the game's key details easy to scan beside its artwork. */
 .quest-info-box {
     background: rgba(10, 5, 3, 0.85);
     padding: 35px;
@@ -98,7 +90,7 @@
     margin-bottom: 15px;
 }
 
-/* Trailer/Media container on game.html */
+/* Frame trailers against the dark background so they stand out. */
 .media-box {
     text-align: center;
     background: #050302;
@@ -123,7 +115,7 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
 
-/* Loading text */
+/* Give loading messages a gentle pulse while the page fetches game details. */
 .loading-text {
     text-align: center;
     font-size: 1.5rem;

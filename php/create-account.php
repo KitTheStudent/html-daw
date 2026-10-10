@@ -1,8 +1,7 @@
 <?php
-// filepath: WEB/php/create-account.php
 session_start();
 
-// Import shared database connection
+// Use the same database connection as the rest of the site.
 require_once __DIR__ . '/db.php';
 
 if ($_SERVER["REQUEST_METHOD"] !== "POST") {

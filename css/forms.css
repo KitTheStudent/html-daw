@@ -1,24 +1,22 @@
-/* ==========================================================================
-   Tavern Forms (Parchment Ledgers)
-   ========================================================================== */
+/* Style account and contact forms like parchment pages from the tavern. */
 
 .form-container {
     max-width: 480px;
     margin: 80px auto;
     padding: 50px 40px;
-    /* Authentic aged parchment texture */
+    /* Layer parchment tones to give the form a softly aged look. */
     background: #e8dce0 linear-gradient(135deg, #f4ecd8 0%, #e8d8b7 50%, #d4c3a3 100%);
-    border: 8px solid #2a160d; /* Thick tavern wood */
+    border: 8px solid #2a160d;
     border-radius: 4px;
     box-shadow: 
-        inset 0 0 40px rgba(101, 67, 33, 0.6), /* Inner parchment burn */
+        inset 0 0 40px rgba(101, 67, 33, 0.6),
         10px 15px 30px rgba(0, 0, 0, 0.9);
     color: #2c1e16;
 }
 
 .form-container h2 {
     text-align: center;
-    color: #5d1010; /* Dried ink/blood */
+    color: #5d1010;
     font-size: 2.2rem;
     margin-bottom: 30px;
     border-bottom: 2px solid #a67c52;
@@ -65,7 +63,7 @@
 .btn-submit {
     width: 100%;
     padding: 16px;
-    /* 3D Crimson wax seal button */
+    /* Give the submit button the look of a raised red wax seal. */
     background: radial-gradient(circle at top left, #9a1e1e, #631212);
     color: #f4ecd8;
     border: 2px solid #3e0b0b;
