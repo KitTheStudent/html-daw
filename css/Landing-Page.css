@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Traveler's Journey - Global Tavern Theme
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    /* Richer radial gradient simulating a glowing hearth in a dark room */
+    background: radial-gradient(circle at 50% -20%, #3e1f0f 0%, #140b07 40%, #050302 100%);
+    color: #d8c3a5; /* Softer, aged bone text */
+    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(to bottom, #2a160d, #1c0e08);
+    border-bottom: 4px solid #0a0503;
+    padding: 30px 0;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
+}
+
+header h1 {
+    color: #f4d03f; /* Richer gold */
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(244, 208, 63, 0.4), 3px 3px 6px #000;
+}
+
+nav {
+    background: linear-gradient(to right, #110905, #1c110a, #110905);
+    border-bottom: 2px solid #4a2e1b;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.8);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+    padding: 15px 20px;
+    flex-wrap: wrap;
+}
+
+nav ul li a {
+    color: #a89481;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.05rem;
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border-bottom: 2px solid transparent;
+}
+
+/* Glowing Embers Hover */
+nav ul li a:hover,
+nav ul li a.active {
+    color: #f4d03f;
+    border-bottom: 2px solid #f4d03f;
+    text-shadow: 0 0 10px rgba(244, 208, 63, 0.6);
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Georgia', serif;
+    letter-spacing: 1px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 20px;
+    background: #050302;
+    border-top: 2px solid #1c0e08;
+    color: #6e5c47;
+    font-size: 0.9rem;
+    margin-top: 60px;
+    box-shadow: inset 0 10px 15px rgba(0,0,0,0.5);
+}

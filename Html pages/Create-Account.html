@@ -1,22 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>RateAnything - Create Account</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveler's Journey - Create Account</title>
+    <link rel="stylesheet" href="../css/Landing-Page.css">
+    <link rel="stylesheet" href="../css/forms.css">
 </head>
-<header>
-    <h1>Create Account</h1>
-</header>
 <body>
-    <form action="http://localhost/WEB/Html%20pages/create-account.php" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <label for="confirm_password">Confirm Password:</label>
-        <input type="password" id="confirm_password" name="confirm_password" required><br><br>
-        <input type="submit" value="Create Account">
-    </form>
+    <header>
+        <h1>Create Account</h1>
+    </header>
+    
+    <nav>   
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <li><a href="Create-Account.html" class="active">Sign Up</a></li>
+            <li><a href="Login-Page.html">Log In</a></li>
+            <li><a href="Categories.html">Categories</a></li>
+        </ul>
+    </nav>
+
+    <div class="form-container">
+        <form action="../php/create-account.php" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" minlength="3" maxlength="20" pattern="[A-Za-z0-9_]+" title="Use 3–20 letters, numbers, or underscores." autocomplete="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" maxlength="254" autocomplete="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" minlength="8" maxlength="128" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9\s]).{8,128}" title="Use 8–128 characters with an uppercase letter, a lowercase letter, a number, and a symbol." autocomplete="new-password" required>
+                <small id="password-requirements" style="font-size: 0.85rem; margin-top: 5px;">Use 8–128 chars with at least one uppercase, lowercase, number, and symbol.</small>
+            </div>
+            
+            <div class="form-group">
+                <label for="confirm_password">Confirm Password:</label>
+                <input type="password" id="confirm_password" name="confirm_password" minlength="8" maxlength="128" autocomplete="new-password" required>
+            </div>
+            
+            <input type="submit" class="btn-submit" value="Create Account">
+        </form>
+    </div>
+
+    <script>
+        const password = document.getElementById("password");
+        const confirmPassword = document.getElementById("confirm_password");
+
+        function validatePasswordMatch() {
+            confirmPassword.setCustomValidity(
+                confirmPassword.value === password.value ? "" : "Passwords do not match."
+            );
+        }
+
+        password.addEventListener("input", validatePasswordMatch);
+        confirmPassword.addEventListener("input", validatePasswordMatch);
+    </script>
 </body>
 </html>

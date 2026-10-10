@@ -1,0 +1,140 @@
+/* ==========================================================================
+   Tavern General Pages (About, Categories, Media Boxes)
+   ========================================================================== */
+
+/* Main Text Container (Used for About page, Lore, etc.) */
+.page-container {
+    max-width: 850px;
+    margin: 60px auto;
+    padding: 40px 50px;
+    background: rgba(17, 9, 5, 0.9); /* Deep, smoky wood tone */
+    border: 2px solid #4a2e1b;
+    border-radius: 8px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0, 0, 0, 0.7);
+}
+
+.page-title {
+    color: #f4d03f;
+    font-size: 2.4rem;
+    text-align: center;
+    border-bottom: 2px dashed #4a2e1b;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px rgba(244, 208, 63, 0.3), 2px 2px 4px #000;
+}
+
+.page-content p {
+    font-size: 1.15rem;
+    line-height: 1.9;
+    margin-bottom: 22px;
+    color: #d8c3a5; /* Aged bone text */
+    text-shadow: 1px 1px 3px #000;
+}
+
+.page-content p:last-child {
+    margin-bottom: 0;
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.category-card {
+    display: block;
+    padding: 22px;
+    border: 1px solid #8b5a2b;
+    border-radius: 6px;
+    background: rgba(17, 9, 5, 0.9);
+    color: #d8c3a5;
+    text-decoration: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.category-card:hover,
+.category-card:focus-visible {
+    background: rgba(58, 35, 21, 0.95);
+    transform: translateY(-3px);
+}
+
+.category-card:focus-visible {
+    outline: 2px solid #f4d03f;
+    outline-offset: 3px;
+}
+
+.category-card h3 {
+    margin: 0 0 10px;
+    color: #f4d03f;
+}
+
+.category-card p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   Game Details Specific Styling
+   ========================================================================== */
+
+/* The detailed quest info box on game.html */
+.quest-info-box {
+    background: rgba(10, 5, 3, 0.85);
+    padding: 35px;
+    border-radius: 8px;
+    border: 1px solid #8b5a2b;
+    box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
+}
+
+.quest-info-box .badge {
+    margin-bottom: 20px;
+}
+
+.quest-info-box p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+/* Trailer/Media container on game.html */
+.media-box {
+    text-align: center;
+    background: #050302;
+    padding: 25px;
+    border: 2px solid #3a2315;
+    border-radius: 6px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.9);
+    margin-top: 20px;
+}
+
+.media-box p {
+    color: #8b5a2b;
+    font-style: italic;
+    font-size: 1.1rem;
+}
+
+.media-box video, 
+.media-box iframe {
+    max-width: 100%;
+    border: 2px solid #4a2e1b;
+    border-radius: 4px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}
+
+/* Loading text */
+.loading-text {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #f4d03f;
+    margin-top: 60px;
+    font-style: italic;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; text-shadow: 0 0 10px rgba(244, 208, 63, 0.5); }
+    100% { opacity: 0.6; }
+}

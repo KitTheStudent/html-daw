@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveler's Journey - Game Details</title>
+    <link rel="stylesheet" href="../css/Landing-Page.css">
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../css/pages.css">
+</head>
+<body>
+
+    <header>
+        <h1>Traveler's Journey</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="Home.html">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <li><a href="Create-Account.html">Sign Up</a></li>
+            <li><a href="Login-Page.html">Log In</a></li>
+            <li><a href="Categories.html">Categories</a></li>
+        </ul>
+    </nav>
+
+    <main class="page-wrapper" style="margin: 30px auto;">
+        <!-- Loading Indicator -->
+        <div id="game-loading" style="text-align: center; font-size: 1.2rem;">Loading quest details from archives...</div>
+
+        <!-- Dynamic Game Content -->
+        <div id="game-details-content" style="display: none;">
+            <h1 id="game-title"></h1>
+            
+            <div style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                <img id="game-banner" style="width: 100%; max-width: 500px; border-radius: 10px; border: 2px solid #54311c;" src="" alt="Game Artwork">
+                
+                <div style="flex: 1; min-width: 280px; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; border: 1px solid #54311c;">
+                    <div class="game-logo-wrap">
+                        <img id="game-logo" class="game-logo" alt="" hidden>
+                        <p id="game-wordmark" class="game-wordmark"></p>
+                    </div>
+                    <h3 style="color: #e8ad4b; margin-bottom: 15px;">Quest Info</h3>
+                    <p><strong>RAWG rating:</strong> <span id="game-rating"></span> / 5</p>
+                    <p><strong>Release Date:</strong> <span id="game-released"></span></p>
+                    <p><strong>Genres:</strong> <span id="game-genres"></span></p>
+                    
+                    <!-- Direct Steam Store Link -->
+                    <div id="steam-link-container" style="margin-top: 20px;"></div>
+                </div>
+            </div>
+
+            <hr class="hr-tavern">
+
+            <!-- Game Description -->
+            <section style="margin-bottom: 30px;">
+                <h2>Overview</h2>
+                <div id="game-description"></div>
+            </section>
+
+            <hr class="hr-tavern">
+
+            <!-- Video Trailer Section -->
+            <section style="margin-bottom: 30px;">
+                <h2>Trailers & Gameplay Clips</h2>
+                <div id="trailer-container">
+                    <p>No video trailers found for this title.</p>
+                </div>
+            </section>
+
+            <hr class="hr-tavern">
+
+            <!-- Rating & Comments Section -->
+            <section style="background: rgba(0,0,0,0.3); padding: 25px; border-radius: 10px; border: 1px solid #54311c;">
+                <h2>Submit Your Review</h2>
+                <form id="review-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto;">
+                    <p id="review-status" role="status" aria-live="polite"></p>
+                    
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="rating-select" style="margin-bottom: 5px; color: #e8ad4b;">Your XP score (out of 5):</label>
+                        <select id="rating-select" style="padding: 10px; font-size: 16px; background: rgba(255, 255, 255, 0.8); border: 2px solid #a67c52; border-radius: 4px;">
+                            <option value="5">5 XP - Legendary</option>
+                            <option value="4">4 XP - Great Quest</option>
+                            <option value="3">3 XP - Average</option>
+                            <option value="2">2 XP - Tough Journey</option>
+                            <option value="1">1 XP - Avoid</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column;">
+                        <label for="comment-text" style="margin-bottom: 5px; color: #e8ad4b;">Review Comments:</label>
+                        <textarea id="comment-text" rows="4" style="padding: 10px; font-size: 16px; background: rgba(255, 255, 255, 0.8); border: 2px solid #a67c52; border-radius: 4px;" placeholder="Share your experience..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit" style="margin-top: 10px;">Post Review ⚔️</button>
+                </form>
+            </section>
+
+            <section class="reviews-section" aria-labelledby="reviews-heading">
+                <div class="reviews-heading">
+                    <h2 id="reviews-heading">Adventurers' Reviews</h2>
+                    <label for="review-sort">Sort by:
+                        <select id="review-sort">
+                            <option value="latest">Newest</option>
+                            <option value="most_liked">Most liked</option>
+                            <option value="highest_xp">Highest XP</option>
+                        </select>
+                    </label>
+                </div>
+                <p id="reviews-status" role="status" aria-live="polite">Loading reviews...</p>
+                <div id="reviews-list" class="reviews-list"></div>
+            </section>
+        </div>
+    </main>
+
+    <script src="../js/games.js"></script>
+    <script src="../js/game-details.js"></script>
+</body>
+</html>

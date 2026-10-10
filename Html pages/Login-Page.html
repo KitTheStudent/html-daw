@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
-    <title>RateAnything - Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/Landing-Page.css">
+    <link rel="stylesheet" href="../css/forms.css">
+    <title>Traveler's Journey - Login</title>
 </head>
-<header>
-    <h1>LOGIN</h1>
-</header>
 <body>
-<form action="http://localhost/WEB/Html%20pages/Login-Page.php" method="post">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required>
+    <header>
+        <h1>Traveler's Journey</h1>
+    </header>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-
-    <input type="submit" value="Login">
-</form>
+    <main class="form-container">
+        <h2>Log In</h2>
+        <form action="../php/Login-Page.php" method="post">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" autocomplete="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" autocomplete="current-password" required>
+            </div>
+            <input class="btn-submit" type="submit" value="Login">
+        </form>
+        <p class="form-footer">New traveler? <a href="Create-Account.html">Create an account</a></p>
+    </main>
 </body>
 </html>

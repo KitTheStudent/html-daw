@@ -1,1 +1,85 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traveler's Journey - Home</title>
+    <link rel="stylesheet" href="../css/Landing-Page.css">
+    <link rel="stylesheet" href="../css/home.css">
+</head>
+<body>
+
+    <header>
+        <h1>Traveler's Journey</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="Home.html" class="active">Home</a></li>
+            <li><a href="About.html">About</a></li>
+            <li><a href="Contact.html">Contact</a></li>
+            <li><a href="Create-Account.html">Sign Up</a></li>
+            <li><a href="Login-Page.html">Log In</a></li>
+            <li><a href="Categories.html">Categories</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- 1. Featured Spotlight Section -->
+        <section class="featured-section">
+            <h2>⚔️ Featured Quest of the Week</h2>
+            <div id="featured-game" class="featured-card">
+                <img id="featured-image" class="featured-art" alt="" aria-hidden="true">
+                <div class="featured-content">
+                    <span class="badge">Spotlight RPG</span>
+                    <h3 id="featured-title">Loading Featured Game...</h3>
+                    <p id="featured-description">Warming by the hearth, preparing the scrolls...</p>
+                    <a id="featured-btn" href="#" class="btn-primary">View Featured Quest</a>
+                    <div class="featured-controls" aria-label="Featured games">
+                        <button id="featured-prev" type="button" aria-label="Previous featured game">Previous</button>
+                        <span id="featured-position" aria-live="polite"></span>
+                        <button id="featured-toggle" type="button" aria-pressed="false">Pause</button>
+                        <button id="featured-next" type="button" aria-label="Next featured game">Next</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Trending RPGs Section -->
+        <section class="trending-section">
+            <h2>🔥 Trending RPGs</h2>
+            <p id="catalog-filter-status" role="status" aria-live="polite"></p>
+            <div id="trending-grid" class="game-grid">
+                <p>Summoning trending titles from the RAWG archives...</p>
+            </div>
+            <nav class="catalog-pagination trending-pagination" aria-label="Trending game pages">
+                <button id="trending-previous" type="button" disabled>Previous trending</button>
+                <span id="trending-position" aria-live="polite"></span>
+                <button id="trending-next" type="button" disabled>Next trending</button>
+            </nav>
+        </section>
+
+        <!-- 3. Full RPG Archive Section -->
+        <section class="explore-section">
+            <h2>📜 The RPG Scroll</h2>
+            <div id="rpg-grid" class="game-grid">
+                <p>Loading full RPG catalog...</p>
+            </div>
+            <nav class="catalog-pagination" aria-label="Game catalog pages">
+                <button id="catalog-previous" type="button" disabled>Previous games</button>
+                <span id="catalog-position" aria-live="polite"></span>
+                <button id="catalog-next" type="button" disabled>Next games</button>
+            </nav>
+            <p id="catalog-load-status" role="status" aria-live="polite"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Traveler's Journey. Rest by the fire.</p>
+    </footer>
+
+    <!-- Connect your JavaScript data -->
+    <script src="../js/games.js"></script>
+    <script src="../js/api.js"></script>
+</body>
+</html>
