@@ -2,6 +2,8 @@
    Traveler's Journey - Global Tavern Theme
    ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -12,7 +14,7 @@ body {
     /* Richer radial gradient simulating a glowing hearth in a dark room */
     background: radial-gradient(circle at 50% -20%, #3e1f0f 0%, #140b07 40%, #050302 100%);
     color: #d8c3a5; /* Softer, aged bone text */
-    font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+    font-family: 'Lora', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
     min-height: 100vh;
     line-height: 1.6;
 }
@@ -74,7 +76,7 @@ nav ul li a.active {
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Georgia', serif;
+    font-family: 'Cinzel', 'Georgia', serif;
     letter-spacing: 1px;
 }
 
