@@ -103,6 +103,37 @@ nav ul li a.active {
     text-shadow: 0 0 10px rgba(244, 208, 63, 0.6);
 }
 
+.auth-status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #d8c3a5;
+    font-size: 0.9rem;
+}
+
+.auth-status form {
+    margin: 0;
+}
+
+.auth-status button {
+    padding: 5px 9px;
+    border: 1px solid #a67c52;
+    border-radius: 3px;
+    background: #2a160d;
+    color: #f4d03f;
+    font: inherit;
+    cursor: pointer;
+}
+
+.auth-status button:hover {
+    background: #4a2e1b;
+}
+
+.auth-status-header {
+    justify-content: center;
+    margin-top: 8px;
+}
+
 h1, h2, h3, h4 {
     font-family: 'Cinzel', 'Georgia', serif;
     letter-spacing: 1px;
