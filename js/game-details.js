@@ -25,6 +25,8 @@ async function initializeGamePage() {
     } else if (!game) {
         loading.textContent = "This game could not be found. Return home and choose a game from the catalog.";
         return;
+    } else {
+        showEmbeddedTrailerSearch(game.name, "Live trailer lookup is unavailable right now.");
     }
 
     loading.style.display = "none";
@@ -62,7 +64,10 @@ async function loadRawgGame(gameId, gameName) {
     try {
         let rawgId = gameId;
         if (!/^\d+$/.test(rawgId)) {
-            if (!gameName) return;
+            if (!gameName) {
+                showEmbeddedTrailerSearch("");
+                return;
+            }
             const searchUrl = new URL("https://api.rawg.io/api/games");
             searchUrl.searchParams.set("key", window.RAWG_API_KEY);
             searchUrl.searchParams.set("search", gameName);
@@ -72,7 +77,7 @@ async function loadRawgGame(gameId, gameName) {
             const searchData = await searchResponse.json();
             rawgId = String(searchData.results?.[0]?.id || "");
             if (!rawgId) {
-                showEmbeddedTrailerSearch(gameName || "");
+                showEmbeddedTrailerSearch(gameName);
                 return;
             }
         }
@@ -96,10 +101,8 @@ async function loadRawgGame(gameId, gameName) {
             loadRawgTrailer(rawgId),
             loadRawgSteamLink(rawgId)
         ]);
-        if (!hasRawgTrailer && steamAppId) await loadSteamTrailer(steamAppId);
-        else if (!hasRawgTrailer) {
-            document.getElementById("trailer-container").textContent = "No playable trailer is available for this game.";
-        }
+        if (!hasRawgTrailer && steamAppId) await loadSteamTrailer(steamAppId, game.name);
+        else if (!hasRawgTrailer) showEmbeddedTrailerSearch(game.name);
     } catch (error) {
         console.error("Could not load expanded RAWG game details.", error);
         showEmbeddedTrailerSearch(gameName || document.getElementById("game-title").textContent);
@@ -161,21 +164,20 @@ async function loadRawgSteamLink(gameId) {
     }
 }
 
-async function loadSteamTrailer(appId) {
-    const container = document.getElementById("trailer-container");
+async function loadSteamTrailer(appId, gameName) {
     try {
         const url = new URL("../php/steam-trailer.php", window.location.href);
         url.searchParams.set("app_id", appId);
         const response = await fetch(url, { credentials: "same-origin" });
         const result = await response.json();
         if (!response.ok) {
-            container.textContent = result.message || "No playable trailer is available for this game.";
+            showEmbeddedTrailerSearch(gameName, result.message || "No playable trailer is available for this game.");
             return;
         }
         renderTrailer(result.stream, "application/vnd.apple.mpegurl", result.name);
     } catch (error) {
         console.error("Could not load a Steam trailer.", error);
-        container.textContent = "The trailer could not be loaded.";
+        showEmbeddedTrailerSearch(gameName, "The trailer could not be loaded.");
     }
 }
 
@@ -185,6 +187,9 @@ function renderTrailer(streamUrl, format, title) {
     video.preload = "metadata";
     video.className = "game-trailer";
     video.setAttribute("aria-label", `${title || document.getElementById("game-title").textContent} trailer`);
+    video.addEventListener("error", () => {
+        showEmbeddedTrailerSearch(document.getElementById("game-title").textContent, "This trailer could not be played here.");
+    }, { once: true });
 
     if (format === "video/mp4") {
         const source = document.createElement("source");
@@ -204,11 +209,25 @@ function renderTrailer(streamUrl, format, title) {
     loadHlsPlayer(video, streamUrl);
 }
 
+function showEmbeddedTrailerSearch(gameName, message = "No playable trailer is available for this game.") {
+    const container = document.getElementById("trailer-container");
+    container.replaceChildren();
+    const status = document.createElement("p");
+    status.textContent = message;
+    const link = document.createElement("a");
+    const query = gameName ? `${gameName} official trailer` : "RPG official trailer";
+    link.href = `https://www.youtube.com/results?search_query=${encodeURIComponent(query)}`;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    link.textContent = "Search trailers on YouTube";
+    container.append(status, link);
+}
+
 function loadHlsPlayer(video, streamUrl) {
     const container = document.getElementById("trailer-container");
     const startPlayer = () => {
         if (!window.Hls || !window.Hls.isSupported()) {
-            container.textContent = "This browser cannot play the available trailer format.";
+            showEmbeddedTrailerSearch(document.getElementById("game-title").textContent, "This browser cannot play the available trailer format.");
             return;
         }
 
@@ -218,7 +237,7 @@ function loadHlsPlayer(video, streamUrl) {
         player.on(window.Hls.Events.ERROR, (_event, data) => {
             if (data.fatal) {
                 player.destroy();
-                container.textContent = "The trailer stream could not be played.";
+                showEmbeddedTrailerSearch(document.getElementById("game-title").textContent, "The trailer stream could not be played here.");
             }
         });
         container.replaceChildren(video);
@@ -233,7 +252,7 @@ function loadHlsPlayer(video, streamUrl) {
     script.src = "https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js";
     script.onload = startPlayer;
     script.onerror = () => {
-        container.textContent = "The trailer player could not be loaded.";
+        showEmbeddedTrailerSearch(document.getElementById("game-title").textContent, "The trailer player could not be loaded.");
     };
     document.head.append(script);
 }
@@ -380,7 +399,7 @@ function setupXpRatingPicker() {
     };
 
     function updateDisplay(rating) {
-        const numericRating = parseInt(rating, 10) || 1;
+        const numericRating = parseInt(rating, 10) || 5;
         stars.forEach(star => {
             star.classList.remove('hover-active');
             const val = parseInt(star.getAttribute('data-value'), 10);
@@ -421,11 +440,11 @@ function setupXpRatingPicker() {
     const form = document.getElementById('review-form');
     if (form) {
         form.addEventListener('reset', () => {
-            select.value = '1';
-            setTimeout(() => updateDisplay(1), 0);
+            select.value = '5';
+            setTimeout(() => updateDisplay(5), 0);
         });
     }
 
-    select.value = select.value || '1';
+    select.value = '5';
     updateDisplay(select.value);
 }

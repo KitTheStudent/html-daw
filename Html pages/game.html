@@ -122,11 +122,11 @@
                         
                         <!-- Visual Hover XP "+" -->
                         <div id="xp-star-rating" class="xp-star-rating">
-                        <i class="fa-solid fa-plus active" data-value="1" title="1 XP - Avoid at all costs ❌"></i>
+                        <i class="fa-solid fa-plus" data-value="1" title="1 XP - Avoid at all costs ❌"></i>
                         <i class="fa-solid fa-plus" data-value="2" title="2 XP - Tough Journey 🛡️"></i>
                         <i class="fa-solid fa-plus" data-value="3" title="3 XP - Average Quest 🗡️"></i>
                         <i class="fa-solid fa-plus" data-value="4" title="4 XP - Great Quest ⚔️"></i>
-                        <i class="fa-solid fa-plus" data-value="5" title="5 XP - Legendary 🏆"></i>
+                        <i class="fa-solid fa-plus active" data-value="5" title="5 XP - Legendary 🏆"></i>
                         </div>
 
                         <!-- Dynamic Rank Badge -->
@@ -136,11 +136,11 @@
 
                         <!-- Hidden select keeping js/game-details.js working -->
                         <select id="rating-select" name="rating" hidden>
-                            <option value="1" selected>1 XP</option>
+                            <option value="1">1 XP</option>
                             <option value="2">2 XP</option>
                             <option value="3">3 XP</option>
                             <option value="4">4 XP</option>
-                            <option value="5">5 XP</option>
+                            <option value="5" selected>5 XP</option>
                         </select>
                     </div>
 
@@ -172,60 +172,5 @@
 
     <script src="../js/games.js"></script>
     <script src="../js/game-details.js"></script>
-
-    <!-- Interactive Script for "+" Rating Hover & Click Events -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const stars = document.querySelectorAll('#xp-star-rating i');
-            const badgeText = document.getElementById('xp-rank-text');
-            const select = document.getElementById('rating-select');
-            const ratingContainer = document.getElementById('xp-star-rating');
-
-            const rankLabels = {
-                1: '1 XP - Avoid ☠️',
-                2: '2 XP - Tough Journey 📜',
-                3: '3 XP - Average 🛡️',
-                4: '4 XP - Great Quest ⚔️',
-                5: '5 XP - Legendary 🏆'
-            };
-
-            function updateDisplay(rating) {
-                stars.forEach(star => {
-                    const val = parseInt(star.getAttribute('data-value'));
-                    if (val <= rating) {
-                        star.classList.add('active');
-                    } else {
-                        star.classList.remove('active');
-                    }
-                });
-                badgeText.innerText = rankLabels[rating];
-            }
-
-            stars.forEach(star => {
-                // Hover effect: highlight shields up to cursor position
-                star.addEventListener('mouseenter', () => {
-                    const hoverVal = parseInt(star.getAttribute('data-value'));
-                    stars.forEach(s => {
-                        const v = parseInt(s.getAttribute('data-value'));
-                        s.classList.toggle('hover-active', v <= hoverVal);
-                    });
-                    badgeText.innerText = rankLabels[hoverVal];
-                });
-
-                // Click event: lock selection into hidden select box
-                star.addEventListener('click', () => {
-                    const selectedVal = star.getAttribute('data-value');
-                    select.value = selectedVal;
-                    updateDisplay(selectedVal);
-                });
-            });
-
-            // Restore active state when mouse leaves rating component
-            ratingContainer.addEventListener('mouseleave', () => {
-                stars.forEach(s => s.classList.remove('hover-active'));
-                updateDisplay(select.value);
-            });
-        });
-    </script>
 </body>
 </html>

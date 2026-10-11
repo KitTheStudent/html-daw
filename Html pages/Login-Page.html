@@ -23,9 +23,19 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" autocomplete="current-password" required>
             </div>
+            <label class="password-toggle" for="show-password">
+                <input type="checkbox" id="show-password">
+                Show password
+            </label>
             <input class="btn-submit" type="submit" value="Login">
         </form>
         <p class="form-footer">New traveler? <a href="Create-Account.html">Create an account</a></p>
     </main>
+    <script>
+        const password = document.getElementById("password");
+        document.getElementById("show-password").addEventListener("change", event => {
+            password.type = event.target.checked ? "text" : "password";
+        });
+    </script>
 </body>
 </html>

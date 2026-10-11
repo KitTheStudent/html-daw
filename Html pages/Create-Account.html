@@ -45,6 +45,11 @@
                 <label for="confirm_password">Confirm Password:</label>
                 <input type="password" id="confirm_password" name="confirm_password" minlength="8" maxlength="128" autocomplete="new-password" required>
             </div>
+
+            <label class="password-toggle" for="show-passwords">
+                <input type="checkbox" id="show-passwords">
+                Show passwords
+            </label>
             
             <input type="submit" class="btn-submit" value="Create Account">
         </form>
@@ -62,6 +67,12 @@
 
         password.addEventListener("input", validatePasswordMatch);
         confirmPassword.addEventListener("input", validatePasswordMatch);
+
+        document.getElementById("show-passwords").addEventListener("change", event => {
+            const type = event.target.checked ? "text" : "password";
+            password.type = type;
+            confirmPassword.type = type;
+        });
     </script>
 </body>
 </html>
