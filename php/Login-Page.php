@@ -48,8 +48,8 @@ if ($passwordIsValid) {
     $_SESSION["user_id"] = $user["id"];
     $_SESSION["username"] = $user["username"];
     
-    // Send the newly signed-in user back to the welcome page.
-    header("Location: ../Html%20pages/Landing-page.html");
+    // Send the newly signed-in user to the home page.
+    header("Location: ../Html%20pages/Home.html");
     exit;
 }
 

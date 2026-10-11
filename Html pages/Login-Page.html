@@ -14,6 +14,9 @@
 
     <main class="form-container">
         <h2>Log In</h2>
+        <p id="account-created-notice" class="form-success" role="status" aria-live="polite" hidden>
+            Account created successfully. You can now log in.
+        </p>
         <form action="../php/Login-Page.php" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -36,6 +39,10 @@
         document.getElementById("show-password").addEventListener("change", event => {
             password.type = event.target.checked ? "text" : "password";
         });
+
+        if (new URLSearchParams(window.location.search).get("created") === "1") {
+            document.getElementById("account-created-notice").hidden = false;
+        }
     </script>
 </body>
 </html>

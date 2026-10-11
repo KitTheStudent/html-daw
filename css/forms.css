@@ -25,6 +25,16 @@
     letter-spacing: 2px;
 }
 
+.form-success {
+    margin-bottom: 20px;
+    padding: 12px 14px;
+    border: 1px solid #4b6b35;
+    border-radius: 3px;
+    background: rgba(223, 239, 204, 0.8);
+    color: #29451f;
+    font-weight: bold;
+}
+
 .form-group {
     margin-bottom: 25px;
     display: flex;

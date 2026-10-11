@@ -57,7 +57,7 @@ $stmt = $conn->prepare(
 $stmt->bind_param("sss", $username, $email, $hashedPassword);
 
 if ($stmt->execute()) {
-    header("Location: ../Html%20pages/Login-Page.html");
+    header("Location: ../Html%20pages/Login-Page.html?created=1");
     exit;
 }
 
