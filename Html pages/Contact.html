@@ -6,6 +6,8 @@
     <title>Traveler's Journey - Contact</title>
     <link rel="stylesheet" href="../css/Landing-Page.css">
     <link rel="stylesheet" href="../css/forms.css">
+    <!-- Font Awesome CDN for real vector icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
     <header>
@@ -24,19 +26,25 @@
     </nav>
 
     <div class="form-container">
-        <h2>Send a Raven</h2>
+        <h2><i class="fa-solid fa-crow"></i> Send a Raven</h2>
         <p class="form-footer">Submitting opens your email app with the message ready to send.</p>
+        
         <form action="mailto:lardizabalkitandrew@gmail.com" method="post" enctype="text/plain">
             <input type="hidden" name="subject" value="Traveler's Journey contact message">
+            
             <div class="form-group">
                 <label for="name">Your Name:</label>
                 <input type="text" id="name" name="name" autocomplete="name" required>
             </div>
+            
             <div class="form-group">
                 <label for="message">Message:</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
             </div>
-            <input type="submit" class="btn-submit" value="Send Message">
+            
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-feather"></i> Dispatch Raven
+            </button>
         </form>
     </div>
 </body>
