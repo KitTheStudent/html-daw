@@ -7,6 +7,46 @@
     <link rel="stylesheet" href="../css/Landing-Page.css">
     <link rel="stylesheet" href="../css/home.css">
     <link rel="stylesheet" href="../css/pages.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* XP Shield Rating Styling & Hover Effects */
+        .xp-star-rating {
+            display: flex;
+            gap: 12px;
+            font-size: 2rem;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .xp-star-rating .fa-shield-halved {
+            color: #4a3b32;
+            transition: transform 0.2s ease, color 0.2s ease, filter 0.2s ease;
+        }
+
+        /* Highlight shield on hover and active click */
+        .xp-star-rating .fa-shield-halved:hover,
+        .xp-star-rating .fa-shield-halved.active,
+        .xp-star-rating .fa-shield-halved.hover-active {
+            color: #f4d03f;
+            filter: drop-shadow(0 0 8px rgba(244, 208, 63, 0.7));
+            transform: scale(1.2);
+        }
+
+        /* Tavern Rank Badge Styling */
+        .xp-rank-badge {
+            display: inline-block;
+            background: rgba(30, 20, 15, 0.9);
+            border: 1px solid #e8ad4b;
+            color: #f4d03f;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.6);
+            transition: all 0.2s ease;
+        }
+    </style>
 </head>
 <body>
 
@@ -77,14 +117,30 @@
                 <form id="review-form" style="display: flex; flex-direction: column; gap: 15px; max-width: 600px; margin: 0 auto;">
                     <p id="review-status" role="status" aria-live="polite"></p>
                     
-                    <div style="display: flex; flex-direction: column;">
-                        <label for="rating-select" style="margin-bottom: 5px; color: #e8ad4b;">Your XP score (out of 5):</label>
-                        <select id="rating-select" style="padding: 10px; font-size: 16px; background: rgba(255, 255, 255, 0.8); border: 2px solid #a67c52; border-radius: 4px;">
-                            <option value="5">5 XP - Legendary</option>
-                            <option value="4">4 XP - Great Quest</option>
-                            <option value="3">3 XP - Average</option>
-                            <option value="2">2 XP - Tough Journey</option>
-                            <option value="1">1 XP - Avoid</option>
+                    <div class="xp-rating-picker-wrap" style="margin-bottom: 15px;">
+                        <label style="display: block; margin-bottom: 8px; color: #e8ad4b; font-weight: bold;">Your XP Score:</label>
+                        
+                        <!-- Visual Hover XP "+" -->
+                        <div id="xp-star-rating" class="xp-star-rating">
+                        <i class="fa-solid fa-plus active" data-value="1" title="1 XP - Avoid at all costs ❌"></i>
+                        <i class="fa-solid fa-plus" data-value="2" title="2 XP - Tough Journey 🛡️"></i>
+                        <i class="fa-solid fa-plus" data-value="3" title="3 XP - Average Quest 🗡️"></i>
+                        <i class="fa-solid fa-plus" data-value="4" title="4 XP - Great Quest ⚔️"></i>
+                        <i class="fa-solid fa-plus" data-value="5" title="5 XP - Legendary 🏆"></i>
+                        </div>
+
+                        <!-- Dynamic Rank Badge -->
+                        <div id="xp-rank-badge" class="xp-rank-badge">
+                            <span id="xp-rank-text">5 XP - Legendary 🏆</span>
+                        </div>
+
+                        <!-- Hidden select keeping js/game-details.js working -->
+                        <select id="rating-select" name="rating" hidden>
+                            <option value="1" selected>1 XP</option>
+                            <option value="2">2 XP</option>
+                            <option value="3">3 XP</option>
+                            <option value="4">4 XP</option>
+                            <option value="5">5 XP</option>
                         </select>
                     </div>
 
@@ -116,5 +172,60 @@
 
     <script src="../js/games.js"></script>
     <script src="../js/game-details.js"></script>
+
+    <!-- Interactive Script for "+" Rating Hover & Click Events -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const stars = document.querySelectorAll('#xp-star-rating i');
+            const badgeText = document.getElementById('xp-rank-text');
+            const select = document.getElementById('rating-select');
+            const ratingContainer = document.getElementById('xp-star-rating');
+
+            const rankLabels = {
+                1: '1 XP - Avoid ☠️',
+                2: '2 XP - Tough Journey 📜',
+                3: '3 XP - Average 🛡️',
+                4: '4 XP - Great Quest ⚔️',
+                5: '5 XP - Legendary 🏆'
+            };
+
+            function updateDisplay(rating) {
+                stars.forEach(star => {
+                    const val = parseInt(star.getAttribute('data-value'));
+                    if (val <= rating) {
+                        star.classList.add('active');
+                    } else {
+                        star.classList.remove('active');
+                    }
+                });
+                badgeText.innerText = rankLabels[rating];
+            }
+
+            stars.forEach(star => {
+                // Hover effect: highlight shields up to cursor position
+                star.addEventListener('mouseenter', () => {
+                    const hoverVal = parseInt(star.getAttribute('data-value'));
+                    stars.forEach(s => {
+                        const v = parseInt(s.getAttribute('data-value'));
+                        s.classList.toggle('hover-active', v <= hoverVal);
+                    });
+                    badgeText.innerText = rankLabels[hoverVal];
+                });
+
+                // Click event: lock selection into hidden select box
+                star.addEventListener('click', () => {
+                    const selectedVal = star.getAttribute('data-value');
+                    select.value = selectedVal;
+                    updateDisplay(selectedVal);
+                });
+            });
+
+            // Restore active state when mouse leaves rating component
+            ratingContainer.addEventListener('mouseleave', () => {
+                stars.forEach(s => s.classList.remove('hover-active'));
+                updateDisplay(select.value);
+            });
+        });
+    </script>
 </body>
 </html>

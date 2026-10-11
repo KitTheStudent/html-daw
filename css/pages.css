@@ -130,3 +130,25 @@
     50% { opacity: 1; text-shadow: 0 0 10px rgba(244, 208, 63, 0.5); }
     100% { opacity: 0.6; }
 }
+/* XP Rating Component */
+.xp-star-rating {
+    display: flex;
+    gap: 12px;
+    font-size: 2rem;
+    cursor: pointer;
+    margin: 10px 0;
+}
+
+.xp-star-rating i {
+    color: #4a3b32;
+    transition: transform 0.2s ease, color 0.2s ease, filter 0.2s ease;
+}
+
+/* Highlight icon on hover and active selection */
+.xp-star-rating i:hover,
+.xp-star-rating i.active,
+.xp-star-rating i.hover-active {
+    color: #f4d03f;
+    filter: drop-shadow(0 0 8px rgba(244, 208, 63, 0.7));
+    transform: scale(1.2);
+}

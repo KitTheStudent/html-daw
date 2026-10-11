@@ -5,6 +5,8 @@ async function initializeGamePage() {
     const game = (window.RPG_CATALOG || []).find(item => item.id === gameId);
     const loading = document.getElementById("game-loading");
 
+    setupXpRatingPicker();
+
     if (!gameId) {
         loading.textContent = "Choose a game from the home page to view its details.";
         return;
@@ -360,4 +362,70 @@ async function submitReview(event, gameId, form, status) {
             status.append(loginLink);
         }
     }
+}
+function setupXpRatingPicker() {
+    const stars = document.querySelectorAll('#xp-star-rating i');
+    const badgeText = document.getElementById('xp-rank-text');
+    const select = document.getElementById('rating-select');
+    const ratingContainer = document.getElementById('xp-star-rating');
+
+    if (!stars.length || !select) return;
+
+    const rankLabels = {
+        1: '1 XP - Avoid at all costs ❌',
+        2: '2 XP - Tough Journey 🛡️',
+        3: '3 XP - Average Quest 🗡️',
+        4: '4 XP - Great Quest ⚔️',
+        5: '5 XP - Legendary 🏆'
+    };
+
+    function updateDisplay(rating) {
+        const numericRating = parseInt(rating, 10) || 1;
+        stars.forEach(star => {
+            star.classList.remove('hover-active');
+            const val = parseInt(star.getAttribute('data-value'), 10);
+            if (val <= numericRating) {
+                star.classList.add('active');
+            } else {
+                star.classList.remove('active');
+            }
+        });
+        if (badgeText) badgeText.innerText = rankLabels[numericRating] || rankLabels[1];
+    }
+
+    stars.forEach(star => {
+        star.addEventListener('mouseenter', () => {
+            const hoverVal = parseInt(star.getAttribute('data-value'), 10);
+            stars.forEach(s => {
+                const v = parseInt(s.getAttribute('data-value'), 10);
+                s.classList.remove('active');
+                s.classList.toggle('hover-active', v <= hoverVal);
+            });
+            if (badgeText) badgeText.innerText = rankLabels[hoverVal] || '';
+        });
+
+        star.addEventListener('click', () => {
+            const selectedVal = star.getAttribute('data-value');
+            select.value = selectedVal;
+            updateDisplay(selectedVal);
+        });
+    });
+
+    if (ratingContainer) {
+        ratingContainer.addEventListener('mouseleave', () => {
+            stars.forEach(s => s.classList.remove('hover-active'));
+            updateDisplay(select.value || 1);
+        });
+    }
+
+    const form = document.getElementById('review-form');
+    if (form) {
+        form.addEventListener('reset', () => {
+            select.value = '1';
+            setTimeout(() => updateDisplay(1), 0);
+        });
+    }
+
+    select.value = select.value || '1';
+    updateDisplay(select.value);
 }

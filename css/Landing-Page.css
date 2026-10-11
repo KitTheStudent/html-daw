@@ -31,7 +31,37 @@ header h1 {
     font-weight: 700;
     letter-spacing: 3px;
     text-transform: uppercase;
-    text-shadow: 0 0 15px rgba(244, 208, 63, 0.4), 3px 3px 6px #000;
+    text-shadow: 0 0 6px rgba(244, 208, 63, 0.28), 2px 2px 4px #000;
+    background: linear-gradient(
+        110deg,
+        #f4d03f 0 41%,
+        #fff 41.2% 41.45%,
+        #fff7c2 41.55% 41.7%,
+        #f4d03f 41.8% 65%,
+        #fff 65.2% 65.45%,
+        #fff7c2 65.55% 65.7%,
+        #f4d03f 65.8% 100%
+    );
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: title-shine 4s ease-in-out infinite;
+}
+
+@keyframes title-shine {
+    to {
+        background-position: -100% 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    header h1 {
+        animation: none;
+        background: none;
+        -webkit-text-fill-color: #f4d03f;
+    }
 }
 
 nav {
