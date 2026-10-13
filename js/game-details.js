@@ -391,11 +391,11 @@ function setupXpRatingPicker() {
     if (!stars.length || !select) return;
 
     const rankLabels = {
-        1: '1 XP - Avoid at all costs ❌',
-        2: '2 XP - Tough Journey 🛡️',
-        3: '3 XP - Average Quest 🗡️',
-        4: '4 XP - Great Quest ⚔️',
-        5: '5 XP - Legendary 🏆'
+        1: '1 XP - Avoid at all costs',
+        2: '2 XP - Tough Journey',
+        3: '3 XP - Average Quest',
+        4: '4 XP - Great Quest',
+        5: '5 XP - Legendary'
     };
 
     function updateDisplay(rating) {
