@@ -4,6 +4,7 @@ session_start();
 header("Content-Type: application/json; charset=utf-8");
 header("Cache-Control: no-store, no-cache, must-revalidate");
 
+// Return only the session details needed to update the page navigation.
 $loggedIn = isset($_SESSION["user_id"]) && is_string($_SESSION["username"] ?? null);
 
 echo json_encode([

@@ -1,3 +1,4 @@
+-- Store one like per user and review, and remove likes when either record is deleted.
 CREATE TABLE IF NOT EXISTS `review_likes` (
     `review_id` INT(11) NOT NULL,
     `user_id` INT(11) NOT NULL,

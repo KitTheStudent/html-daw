@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", initializeGamePage);
 
 async function initializeGamePage() {
+    // Use the URL to find the selected game, then load its details and reviews.
     const gameId = new URLSearchParams(window.location.search).get("id");
     const game = (window.RPG_CATALOG || []).find(item => item.id === gameId);
     const loading = document.getElementById("game-loading");
@@ -63,6 +64,7 @@ function renderGameDetails(game) {
 async function loadRawgGame(gameId, gameName) {
     try {
         let rawgId = gameId;
+        // Built-in catalog IDs are slugs, so look them up before requesting RAWG details.
         if (!/^\d+$/.test(rawgId)) {
             if (!gameName) {
                 showEmbeddedTrailerSearch("");
@@ -225,6 +227,7 @@ function showEmbeddedTrailerSearch(gameName, message = "No playable trailer is a
 
 function loadHlsPlayer(video, streamUrl) {
     const container = document.getElementById("trailer-container");
+    // Use native HLS playback when available and load hls.js for other browsers.
     const startPlayer = () => {
         if (!window.Hls || !window.Hls.isSupported()) {
             showEmbeddedTrailerSearch(document.getElementById("game-title").textContent, "This browser cannot play the available trailer format.");
@@ -271,6 +274,7 @@ async function loadReviews(gameId) {
         const result = await response.json();
         if (!response.ok) throw new Error(result.message || "Could not load reviews.");
 
+        // Rebuild the list from the latest response so sorting and likes stay in sync.
         list.replaceChildren();
         if (result.reviews.length === 0) {
             status.textContent = "No reviews yet. Be the first adventurer to leave one.";
@@ -390,6 +394,7 @@ function setupXpRatingPicker() {
 
     if (!stars.length || !select) return;
 
+    // Keep the star display and its short description in sync with the form value.
     const rankLabels = {
         1: '1 XP - Avoid at all costs',
         2: '2 XP - Tough Journey',

@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", loadAuthStatus);
 
 async function loadAuthStatus() {
+    // Add the sign-in message to the shared navigation, or to the header if there is no nav.
     const navList = document.querySelector("nav ul");
     const statusItem = document.createElement(navList ? "li" : "div");
     statusItem.className = "auth-status";
@@ -14,6 +15,7 @@ async function loadAuthStatus() {
         header.append(statusItem);
     }
 
+    // Keep the current page usable if the session status endpoint is unavailable.
     try {
         const response = await fetch("../php/auth-status.php", {
             credentials: "same-origin",

@@ -24,6 +24,7 @@
     </nav>
 
     <div class="form-container">
+        <!-- The server checks these fields again when the form is submitted. -->
         <form action="../php/create-account.php" method="post">
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -56,6 +57,7 @@
     </div>
 
     <script>
+        // Match passwords in the browser before sending the form to the server.
         const password = document.getElementById("password");
         const confirmPassword = document.getElementById("confirm_password");
 

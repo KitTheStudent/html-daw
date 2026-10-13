@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "GET") {
 
 $gameId = $_GET["game_id"] ?? null;
 $sort = $_GET["sort"] ?? "latest";
+// Only allow known sort orders; the selected SQL fragment is never user-supplied.
 $allowedSorts = [
     "latest" => "r.created_at DESC, r.id DESC",
     "most_liked" => "likes.like_count DESC, r.created_at DESC, r.id DESC",
@@ -27,6 +28,7 @@ if (!is_string($gameId) || trim($gameId) === "" || strlen($gameId) > 50 || !is_s
 
 $gameId = trim($gameId);
 $userId = isset($_SESSION["user_id"]) ? (int) $_SESSION["user_id"] : 0;
+// Aggregate likes separately so reviews without likes still appear in the results.
 $sql = "
     SELECT
         r.id,

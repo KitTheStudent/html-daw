@@ -397,3 +397,197 @@ section h2 {
     flex: 1 1 250;
     max-width: 100%;
 }
+
+main > section > nav.catalog-pagination {
+    /* Keep the game page controls from picking up the sticky site navigation styles. */
+    position: static;
+    z-index: auto;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+@media (max-width: 760px) {
+    /* Give the home page a little more room on tablets and smaller screens. */
+    header {
+        padding: 22px 16px;
+    }
+
+    header h1 {
+        font-size: clamp(1.8rem, 7vw, 2.5rem);
+        letter-spacing: 2px;
+        line-height: 1.25;
+    }
+
+    body > nav ul {
+        gap: 8px 12px;
+        padding: 10px 12px;
+    }
+
+    body > nav ul li a {
+        display: inline-block;
+        padding: 8px 6px;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    main {
+        margin: 28px auto;
+        padding: 0 16px;
+    }
+
+    section {
+        margin-bottom: 44px;
+    }
+
+    section h2 {
+        font-size: clamp(1.5rem, 5vw, 1.9rem);
+    }
+
+    .featured-card {
+        min-height: 280px;
+        padding: 32px 24px;
+    }
+
+    .featured-content {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .featured-content h3 {
+        font-size: clamp(1.35rem, 5vw, 1.8rem);
+        overflow-wrap: anywhere;
+    }
+
+    .featured-content p {
+        font-size: 1rem;
+    }
+
+    .featured-controls {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .game-grid {
+        /* Keep two game cards across until the screen gets narrow enough to swipe. */
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+    }
+
+    .game-card {
+        flex-direction: column;
+        min-width: 0;
+    }
+
+    .game-card-body {
+        flex-direction: column;
+        min-width: 0;
+        padding: 16px;
+    }
+
+    .game-card h4 {
+        overflow-wrap: anywhere;
+    }
+
+    .catalog-pagination {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+}
+
+@media (max-width: 520px) {
+    /* Use one swipeable row on phones so the game cards stay easy to read. */
+    header {
+        padding: 18px 12px;
+    }
+
+    body > nav ul {
+        gap: 4px 8px;
+        padding: 8px;
+    }
+
+    body > nav ul li a {
+        font-size: 0.8rem;
+        letter-spacing: 0.5px;
+    }
+
+    main {
+        padding: 0 12px;
+    }
+
+    .featured-card {
+        min-height: 260px;
+        padding: 24px 18px;
+    }
+
+    .featured-controls {
+        gap: 4px;
+    }
+
+    .featured-controls button {
+        padding: 5px 6px;
+        font-size: 0.78rem;
+    }
+
+    .catalog-pagination button {
+        padding: 8px 10px;
+        font-size: 0.9rem;
+    }
+
+    .game-grid {
+        grid-auto-flow: column;
+        grid-auto-columns: minmax(190px, 72vw);
+        grid-template-columns: none;
+        gap: 12px;
+        overflow-x: auto;
+        padding-bottom: 8px;
+        /* Snap each card into place while swiping through the row. */
+        scroll-snap-type: x mandatory;
+    }
+
+    .game-card {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        scroll-snap-align: start;
+    }
+
+    .game-card img {
+        width: 100%;
+        height: 130px;
+        min-height: 0;
+        object-fit: cover;
+    }
+
+    .game-card-body {
+        flex: 1;
+        flex-direction: column;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        padding: 12px;
+    }
+
+    .game-card h4 {
+        font-size: 1rem;
+    }
+
+    .game-card .rating {
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    .game-card .btn-details {
+        padding: 8px 6px;
+        font-size: 0.8rem;
+        width: 100%;
+    }
+
+    .catalog-pagination {
+        gap: 8px;
+        font-size: 0.9rem;
+    }
+
+    footer {
+        padding: 24px 14px;
+        overflow-wrap: anywhere;
+    }
+}

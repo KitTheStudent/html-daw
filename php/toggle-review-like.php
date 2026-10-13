@@ -25,6 +25,7 @@ if ($reviewId === false || $reviewId === null || $reviewId < 1) {
 }
 
 $userId = (int) $_SESSION["user_id"];
+// Update the like and recount it together so the response reflects the saved state.
 $conn->begin_transaction();
 
 try {

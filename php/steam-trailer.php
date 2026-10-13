@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "GET") {
 }
 
 $appId = $_GET["app_id"] ?? null;
+// Accept only numeric Steam app IDs before building the upstream request.
 if (!is_string($appId) || preg_match('/\A[0-9]{1,10}\z/', $appId) !== 1) {
     http_response_code(400);
     echo json_encode(["success" => false, "message" => "A valid Steam app ID is required."]);
@@ -43,6 +44,7 @@ if ($responseBody === false || $statusCode < 200 || $statusCode >= 300) {
 curl_close($request);
 $response = json_decode($responseBody, true);
 $app = $response[$appId]["data"] ?? null;
+// Steam can return several trailer formats; use a secure HLS stream when available.
 $movie = is_array($app["movies"] ?? null)
     ? current(array_filter($app["movies"], static function ($item) {
         return is_string($item["hls_h264"] ?? null) && str_starts_with($item["hls_h264"], "https://");

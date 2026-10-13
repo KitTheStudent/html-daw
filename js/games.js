@@ -1,5 +1,6 @@
 window.RAWG_API_KEY = "4dc5b67e24bf4451a7cd54d16f2a1aa3";
 
+// These titles keep the home page populated if the live catalog cannot be loaded.
 window.RPG_CATALOG = [
     { id: "the-witcher-3-wild-hunt", name: "The Witcher 3: Wild Hunt", rating: 4.7, background: "https://images.igdb.com/igdb/image/upload/t_cover_big/co1wyy.jpg", genres: "Action RPG, Adventure", released: "2015-05-18", description: "Become Geralt of Rivia, a monster slayer for hire, and search for the child of prophecy in a vast, story-rich fantasy world." },
     { id: "elden-ring", name: "Elden Ring", rating: 4.5, background: "https://images.igdb.com/igdb/image/upload/t_cover_big/co4jni.jpg", genres: "Action RPG, Open World", released: "2022-02-25", description: "Explore the Lands Between, overcome formidable foes, and shape your own path through a sprawling fantasy adventure." },

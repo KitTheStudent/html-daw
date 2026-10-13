@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] !== "POST") {
 
 $_SESSION = [];
 
+// Expire the session cookie as well as clearing the server-side session.
 if (ini_get("session.use_cookies")) {
     $cookie = session_get_cookie_params();
     setcookie(

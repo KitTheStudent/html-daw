@@ -15,6 +15,7 @@ let trendingPage = 0;
 let catalogControlsBound = false;
 
 async function loadGames() {
+    // Render the bundled titles first so the page has content while RAWG loads.
     builtInCatalog = window.RPG_CATALOG || [];
     renderCatalog(builtInCatalog, builtInCatalog, null, builtInCatalog.length, 0);
 
@@ -46,6 +47,7 @@ async function loadGames() {
 }
 
 function mapRawgGame(game) {
+    // Normalize RAWG results to the same fields used by the built-in catalog.
     return {
         id: String(game.id),
         name: game.name,
@@ -65,6 +67,7 @@ function renderCatalog(games, fallbackGames, nextUrl, total, page) {
     catalogNextUrl = nextUrl;
     catalogTotal = total;
     catalogPage = page;
+    // Keep the current featured title when the catalog is replaced with live results.
     if (newFeaturedGames) {
         trendingPage = 0;
         featuredGames = games;
@@ -82,6 +85,7 @@ function renderCatalog(games, fallbackGames, nextUrl, total, page) {
         catalogControlsBound = true;
     }
 
+    // Category links filter both lists while retaining the full catalog as a fallback.
     const selectedGenre = new URLSearchParams(window.location.search).get("genre");
     let matchingGames = selectedGenre
         ? games.filter(game => genreMatches(game.genres, selectedGenre))
@@ -162,6 +166,7 @@ function setupFeaturedControls() {
         controls.dataset.bound = "true";
     }
 
+    // Respect motion preferences while leaving manual controls available.
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!reducedMotion) {
         featuredPaused = false;
@@ -200,6 +205,7 @@ async function showNextCatalogPage() {
         return;
     }
 
+    // Fetch another RAWG page only after the already-loaded results are used up.
     if (!catalogNextUrl) return;
 
     const nextButton = document.getElementById("catalog-next");

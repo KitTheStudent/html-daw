@@ -44,6 +44,7 @@
         <p class="form-footer">New traveler? <a href="Create-Account.html">Create an account</a></p>
     </main>
     <script>
+        // Let the visitor check their password and show the signup success notice.
         const password = document.getElementById("password");
         document.getElementById("show-password").addEventListener("change", event => {
             password.type = event.target.checked ? "text" : "password";
