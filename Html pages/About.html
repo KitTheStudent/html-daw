@@ -20,14 +20,32 @@
             <li><a href="Create-Account.html">Sign Up</a></li>
             <li><a href="Login-Page.html">Log In</a></li>
             <li><a href="Categories.html">Categories</a></li>
+            <!-- Search button added to the navigation ribbon. -->
+            <li class="ribbon-search">
+                <button id="open-search" type="button" aria-haspopup="dialog" aria-controls="search-dialog">
+                    <span aria-hidden="true">⌕</span>
+                    <span>Search</span>
+                </button>
+            </li>
         </ul>
     </nav>
+
+    <!-- Search popup added; search functionality will be added later. -->
+    <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+        <div class="search-dialog-heading">
+            <h2 id="search-title">Search games</h2>
+            <button id="close-search" class="search-close" type="button" aria-label="Close search">&times;</button>
+        </div>
+        <label class="visually-hidden" for="game-search">Search games</label>
+        <input id="game-search" type="search" placeholder="Search games..." autocomplete="off">
+    </dialog>
 
     <!-- Short introduction to the person and idea behind the site. -->
     <main class="page-container page-content">
         <h2 class="page-title">About Our Tavern</h2>
         <p>Welcome, weary traveler. Pull up a chair by the hearth. Here, adventurers from across the realms gather to share tales of epic quests and rate the journeys they've undertaken. I'm Kit Andrew D. Lardizabal, A.K.A. Wander. I'm a fellow rpg enthusiast. Inspired from y love for the witcher series, kingdom come deliverence, and persona series. Find your favorites and have fun on your travels!</p>
     </main>
+    <script src="../js/search-overlay.js"></script>
     <script src="../js/auth-status.js"></script>
 </body>
 </html>

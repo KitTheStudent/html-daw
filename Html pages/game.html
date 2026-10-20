@@ -62,8 +62,25 @@
             <li><a href="Create-Account.html">Sign Up</a></li>
             <li><a href="Login-Page.html">Log In</a></li>
             <li><a href="Categories.html">Categories</a></li>
+            <!-- Search button added to the navigation ribbon. -->
+            <li class="ribbon-search">
+                <button id="open-search" type="button" aria-haspopup="dialog" aria-controls="search-dialog">
+                    <span aria-hidden="true">⌕</span>
+                    <span>Search</span>
+                </button>
+            </li>
         </ul>
     </nav>
+
+    <!-- Search popup added; search functionality will be added later. -->
+    <dialog id="search-dialog" class="search-dialog" aria-labelledby="search-title">
+        <div class="search-dialog-heading">
+            <h2 id="search-title">Search games</h2>
+            <button id="close-search" class="search-close" type="button" aria-label="Close search">&times;</button>
+        </div>
+        <label class="visually-hidden" for="game-search">Search games</label>
+        <input id="game-search" type="search" placeholder="Search games..." autocomplete="off">
+    </dialog>
 
     <main class="page-wrapper" style="margin: 30px auto;">
         <!-- Show a message until the game's details have loaded. -->
@@ -170,6 +187,7 @@
         </div>
     </main>
 
+    <script src="../js/search-overlay.js"></script>
     <script src="../js/games.js"></script>
     <script src="../js/game-details.js"></script>
     <script src="../js/auth-status.js"></script>
