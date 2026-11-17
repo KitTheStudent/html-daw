@@ -84,31 +84,27 @@ function renderCatalog(games, fallbackGames, nextUrl, total, page) {
         document.getElementById("trending-next").addEventListener("click", showNextTrendingPage);
         catalogControlsBound = true;
     }
-
-    // Category links filter both lists while retaining the full catalog as a fallback.
-    const selectedGenre = new URLSearchParams(window.location.search).get("genre");
-    let matchingGames = selectedGenre
-        ? games.filter(game => genreMatches(game.genres, selectedGenre))
-        : games;
+    const params = new URLSearchParams(window.location.search);
+    const selectedGenre = params.get("genre");
+    const query = params.get("q") || "";
+    let matchingGames = filterGames(games, params);
     let usingBuiltInCategoryResults = false;
-
-    if (selectedGenre && matchingGames.length === 0) {
-        matchingGames = fallbackGames.filter(game => genreMatches(game.genres, selectedGenre));
+    if (matchingGames.length === 0 && selectedGenre && !query) {
+        matchingGames = filterGames(fallbackGames, params);
         usingBuiltInCategoryResults = matchingGames.length > 0;
         if (usingBuiltInCategoryResults) catalogNextUrl = null;
     }
-
     const filterStatus = document.getElementById("catalog-filter-status");
-    if (selectedGenre) {
-        const categoryName = selectedGenre.split("-").map(word =>
-            word.charAt(0).toUpperCase() + word.slice(1)
-        ).join(" ");
-        filterStatus.textContent = matchingGames.length
-            ? `Showing ${matchingGames.length} ${matchingGames.length === 1 ? "game" : "games"} in ${categoryName}${usingBuiltInCategoryResults ? " from the built-in catalog" : ""}.`
-            : `No games in ${categoryName} are currently in the loaded catalog.`;
-    } else {
-        filterStatus.textContent = "";
-    }
+    const filters = [];
+    if (query) filters.push(`matching "${query}"`);
+    if (selectedGenre) filters.push(`in ${selectedGenre.split("-").map(word =>
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(" ")}`);
+    filterStatus.textContent = filters.length
+        ? matchingGames.length
+            ? `Showing ${matchingGames.length} ${matchingGames.length === 1 ? "game" : "games"} ${filters.join(" and ")}${usingBuiltInCategoryResults ? " from the built-in catalog" : ""}.`
+            : `No loaded games ${filters.join(" and ")}.`
+        : "";
 
     const pageStart = catalogPage * GAMES_PER_PAGE;
     const pageGames = matchingGames.slice(pageStart, pageStart + GAMES_PER_PAGE);
@@ -132,7 +128,7 @@ function renderTrendingPage(games) {
 }
 
 function showNextTrendingPage() {
-    const games = getFilteredGames(new URLSearchParams(window.location.search).get("genre"));
+    const games = getFilteredGames();
     if ((trendingPage + 1) * TRENDING_GAMES_PER_PAGE >= games.length) return;
     trendingPage++;
     renderTrendingPage(games);
@@ -141,7 +137,7 @@ function showNextTrendingPage() {
 function showPreviousTrendingPage() {
     if (trendingPage === 0) return;
     trendingPage--;
-    renderTrendingPage(getFilteredGames(new URLSearchParams(window.location.search).get("genre")));
+    renderTrendingPage(getFilteredGames());
 }
 
 function setupFeaturedControls() {
@@ -197,8 +193,8 @@ function moveFeatured(direction) {
 }
 
 async function showNextCatalogPage() {
-    const selectedGenre = new URLSearchParams(window.location.search).get("genre");
-    const currentGames = getFilteredGames(selectedGenre);
+    const params = new URLSearchParams(window.location.search);
+    const currentGames = getFilteredGames();
     if ((catalogPage + 1) * GAMES_PER_PAGE < currentGames.length) {
         catalogPage++;
         renderCatalog(catalogGames, builtInCatalog, catalogNextUrl, catalogTotal, catalogPage);
@@ -220,11 +216,13 @@ async function showNextCatalogPage() {
         const existingIds = new Set(catalogGames.map(game => game.id));
         const nextGames = (data.results || []).map(mapRawgGame).filter(game => !existingIds.has(game.id));
         const combinedGames = catalogGames.concat(nextGames);
-        const loadedFilteredCount = selectedGenre
-            ? combinedGames.filter(game => genreMatches(game.genres, selectedGenre)).length
-            : combinedGames.length;
+        const loadedFilteredCount = filterGames(combinedGames, params).length;
 
-        if (loadedFilteredCount <= catalogPage * GAMES_PER_PAGE && data.next) {
+        if (
+            loadedFilteredCount <= catalogPage * GAMES_PER_PAGE &&
+            data.next &&
+            !params.has("q")
+        ) {
             catalogGames = combinedGames;
             catalogNextUrl = data.next;
             await showNextCatalogPage();
@@ -240,7 +238,7 @@ async function showNextCatalogPage() {
         loadStatus.textContent = "Could not load more games. Please try again.";
     } finally {
         nextButton.textContent = "Next games";
-        updateCatalogControls(getFilteredGames(selectedGenre).length);
+        updateCatalogControls(getFilteredGames().length);
     }
 }
 
@@ -250,12 +248,22 @@ function showPreviousCatalogPage() {
     renderCatalog(catalogGames, builtInCatalog, catalogNextUrl, catalogTotal, catalogPage);
 }
 
-function getFilteredGames(genre) {
-    if (!genre) return catalogGames;
-    const filtered = catalogGames.filter(game => genreMatches(game.genres, genre));
-    return filtered.length
-        ? filtered
-        : builtInCatalog.filter(game => genreMatches(game.genres, genre));
+function getFilteredGames() {
+    const params = new URLSearchParams(window.location.search);
+    const filtered = filterGames(catalogGames, params);
+    if (filtered.length || !params.has("genre") || params.has("q")) {
+        return filtered;
+    }
+    return filterGames(builtInCatalog, params);
+}
+
+function filterGames(games, params) {
+    const genre = params.get("genre");
+    const query = (params.get("q") || "").trim().toLocaleLowerCase();
+    return games.filter(game =>
+        (!genre || genreMatches(game.genres, genre)) &&
+        (!query || game.name.toLocaleLowerCase().includes(query))
+    );
 }
 
 function updateCatalogControls(visibleCount) {
@@ -270,8 +278,9 @@ function updateCatalogControls(visibleCount) {
     if (!visibleCount) {
         position.textContent = "No games to display";
     } else {
-        const selectedGenre = new URLSearchParams(window.location.search).get("genre");
-        const totalText = selectedGenre
+        const params = new URLSearchParams(window.location.search);
+        const hasFilters = params.has("genre") || params.has("q");
+        const totalText = hasFilters
             ? `${visibleCount} matching games loaded`
             : `${visibleCount} games loaded${catalogNextUrl ? ` (${catalogTotal} in RAWG)` : ""}`;
         position.textContent = `Showing ${start + 1}–${end} of ${totalText}`;

@@ -206,14 +206,40 @@ nav ul li a.active {
     font-size: 1.5rem;
 }
 
+.search-dialog form {
+    display: flex;
+    gap: 10px;
+}
+
 .search-dialog input {
     width: 100%;
+    min-width: 0;
     padding: 12px 14px;
     border: 1px solid #8b5a2b;
     border-radius: 4px;
     background: #1c110a;
     color: #f4ecd8;
     font: inherit;
+}
+
+.search-dialog form button {
+    padding: 10px 16px;
+    border: 1px solid #8b5a2b;
+    border-radius: 4px;
+    background: #2a160d;
+    color: #f4ecd8;
+    font: inherit;
+    cursor: pointer;
+}
+
+.search-dialog form button:hover,
+.search-dialog form button:focus-visible {
+    background: #5c3a1b;
+}
+
+.search-dialog form button:focus-visible {
+    outline: 2px solid #f4d03f;
+    outline-offset: 2px;
 }
 
 .search-dialog input::placeholder {
