@@ -54,6 +54,10 @@ $stmt = $conn->prepare(
     "INSERT INTO `user` (username, email, password) VALUES (?, ?, ?)"
 );
 
+if (!$stmt) {
+    exit("Account creation is temporarily unavailable.");
+}
+
 $stmt->bind_param("sss", $username, $email, $hashedPassword);
 
 if ($stmt->execute()) {

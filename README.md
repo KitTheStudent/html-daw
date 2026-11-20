@@ -1,5 +1,13 @@
 Hello Travelers! Welcome to the place where you can go on about your favorite RPG’s. Leave an review,  comments, likes, and especially ratings for both good and bad games. We’d love to hear from your travels!
 
+## Running locally
+
+Start Apache and MySQL from the XAMPP Control Panel, then open the site at:
+
+`http://127.0.0.1/WEB/Html%20pages/Landing-page.html`
+
+Do not use Live Server on port 5500 or 5501 for this project. Live Server cannot execute PHP, and submitting any PHP form or review endpoint through that server will return HTTP 405.
+
 Features:
 - View many RPGs and see the trending
 - Rate and comments

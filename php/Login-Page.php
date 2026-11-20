@@ -24,8 +24,16 @@ if ($username === "" || $password === "") {
 $stmt = $conn->prepare(
     "SELECT id, username, password FROM `user` WHERE username = ?"
 );
+
+if (!$stmt) {
+    exit("Login is temporarily unavailable.");
+}
+
 $stmt->bind_param("s", $username);
-$stmt->execute();
+if (!$stmt->execute()) {
+    $stmt->close();
+    exit("Login is temporarily unavailable.");
+}
 
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
